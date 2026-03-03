@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alison Graduate Verification · Alfe Sani</title>
+  <!-- simple modern styling, matches the clean layout of the original -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f0f5f9;   /* soft background like Alison’s light grey-blue */
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      color: #1e2b37;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .certificate-container {
+      max-width: 900px;
+      width: 100%;
+      background: white;
+      border-radius: 28px;
+      box-shadow: 0 20px 40px -10px rgba(0, 40, 60, 0.2);
+      overflow: hidden;
+      border: 1px solid rgba(0, 115, 130, 0.1);
+    }
+
+    /* header – Alison teal stripe */
+    .alison-header {
+      background: #005f73;    /* Alison deep teal */
+      padding: 1.5rem 2.5rem;
+    }
+
+    .alison-header h1 {
+      color: white;
+      font-weight: 500;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .alison-header h1 span {
+      background: rgba(255,255,255,0.15);
+      padding: 0.2rem 0.9rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+
+    /* main card body */
+    .certificate-body {
+      padding: 2.5rem 2.5rem 2rem;
+    }
+
+    .verify-badge {
+      display: inline-block;
+      background: #e0f2f1;
+      color: #006d77;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      margin-bottom: 1.5rem;
+      border: 1px solid #b6e0e0;
+    }
+
+    .graduate-name {
+      font-size: 2.2rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: #0b2d38;
+    }
+
+    .graduate-name strong {
+      font-weight: 700;
+      background: linear-gradient(145deg, #003d4d, #005f73);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .id-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid #e9edf2;
+    }
+
+    .id-item {
+      font-size: 1rem;
+    }
+
+    .id-item .label {
+      color: #4f6f7a;
+      font-weight: 400;
+      display: block;
+      font-size: 0.85rem;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .id-item .value {
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #1e3a47;
+    }
+
+    /* two column metrics */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.8rem 0 2rem;
+    }
+
+    .metric-card {
+      background: #f7faff;
+      border-radius: 24px;
+      padding: 1.5rem 1.8rem;
+      border: 1px solid #dde9f0;
+    }
+
+    .metric-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #2b5f6b;
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+    }
+
+    .metric-number {
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      color: #003d4d;
+      margin-bottom: 0.2rem;
+    }
+
+    .metric-note {
+      font-size: 0.85rem;
+      color: #4d6975;
+    }
+
+    .assessment-badge {
+      background: #d4edda;
+      color: #0e6245;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      display: inline-block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    /* course info section */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #0f3440;
+      margin: 2rem 0 1.2rem;
+    }
+
+    .course-description {
+      background: #f9fcff;
+      padding: 1.6rem 2rem;
+      border-radius: 24px;
+      border-left: 6px solid #008b9f;
+      color: #1f4454;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.8rem;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .module-item {
+      background: #ffffff;
+      border: 1px solid #d4e2e9;
+      padding: 1rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 500;
+      color: #0b4452;
+      box-shadow: 0 2px 4px rgba(0, 80, 90, 0.05);
+      transition: 0.1s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .module-item::before {
+      content: "✓";
+      color: #008b9f;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    /* footer / verification meta */
+    .verification-footer {
+      margin-top: 2.5rem;
+      border-top: 2px dashed #bdd3dc;
+      padding: 1.8rem 0 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      color: #346977;
+      font-size: 0.9rem;
+    }
+
+    .footer-seal {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-seal img {
+      height: 32px;
+      opacity: 0.7;
+    }
+
+    .footer-verify-link {
+      background: #ecf7fa;
+      padding: 0.5rem 1.5rem;
+      border-radius: 60px;
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: #005f73;
+      border: 1px solid #a7cfd9;
+    }
+
+    /* responsive */
+    @media (max-width: 600px) {
+      .certificate-body { padding: 1.5rem; }
+      .graduate-name { font-size: 1.8rem; }
+      .metrics-grid { grid-template-columns: 1fr; }
+      .id-row { gap: 1rem; }
+      .footer-verify-link { margin-top: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="certificate-container">
+    <!-- header with Alison + VERIFICATION indicator -->
+    <div class="alison-header">
+      <h1>
+        📜 Alison
+        <span>Verification</span>
+      </h1>
+    </div>
+
+    <div class="certificate-body">
+      <!-- small badge -->
+      <div class="verify-badge">🔗  Learner verification · public record</div>
+
+      <!-- graduate name: exact as in original -->
+      <div class="graduate-name">
+        <strong>Alfe Sani</strong>
+      </div>
+
+      <!-- ID row with details from the page -->
+      <div class="id-row">
+        <div class="id-item">
+          <span class="label">Alison ID</span>
+          <span class="value">56411990</span>
+        </div>
+        <div class="id-item">
+          <span class="label">Course completed</span>
+          <span class="value">Customer Service Skills</span>
+        </div>
+        <div class="id-item">
+          <span class="label">Completion date</span>
+          <span class="value">28th February 2026</span>
+        </div>
+        <div class="id-item">
+          <span class="label">Email</span>
+          <span class="value">alfe.sani.data@gmail.com</span>
+        </div>
+      </div>
+
+      <!-- study time + two metrics (score / CPD) exactly as described -->
+      <div style="margin-bottom: 0.5rem; font-size: 1.1rem; font-weight: 500;">
+        ⏱️ Total study time: <span style="font-weight:700;">4h 59m</span>
+      </div>
+
+      <div class="metrics-grid">
+        <!-- final assessment card -->
+        <div class="metric-card">
+          <div class="metric-header">
+            <span>📊</span> Final assessment score
+          </div>
+          <div class="metric-number">100%</div>
+          <div class="metric-note">Alison requires at least 80% to pass</div>
+          <div class="assessment-badge">passed with excellence</div>
+        </div>
+
+        <!-- CPD card -->
+        <div class="metric-card">
+          <div class="metric-header">
+            <span>⏳</span> CPD hours completed
+          </div>
+          <div class="metric-number">3–5h</div>
+          <div class="metric-note">CPD approved learning hours</div>
+        </div>
+      </div>
+
+      <!-- COURSE INFORMATION (exact description from original) -->
+      <div class="section-title">📘 Course information</div>
+      <div class="course-description">
+        Become expert in customer service and polish your professional communication skills in this free online course.
+        This course lays out the basics of good customer service by breaking down how to anticipate people’s expectations to serve your customer base better. We help you to become a customer service specialist by teaching you key social and professional skills that can set you apart from others. We begin by establishing the importance of focusing on the customer and their needs.
+        <br><br>
+        The course then analyzes the shifting rules of modern telephone etiquette. We examine each stage of working with customers over the phone and explain how to handle complaints professionally to ensure that everyone involved is satisfied. People tend to remember bad examples of customer service, so it is essential to make sure they walk away feeling respected.
+        <br><br>
+        Finally, we explore various ways to deal with stress effectively. As a customer service professional, you may encounter work-related stress and, learning to handle it professionally and gracefully is key to your success and wellbeing. We outline proven methods to cope with the stress brought on by interacting with the public. Enrol in this online training course to improve your customer service skills and further your career.
+      </div>
+
+      <!-- MODULES COMPLETED (exact list from original) -->
+      <div class="section-title">✅ Modules completed</div>
+      <div class="modules-grid">
+        <div class="module-item">Module 1: Understanding Customer Service</div>
+        <div class="module-item">Module 2: Focusing on the Customer</div>
+        <div class="module-item">Module 3: Customer Service and the Telephone</div>
+        <div class="module-item">Module 4: Handling Complaints</div>
+        <div class="module-item">Module 5: Enduring Stress</div>
+        <div class="module-item">Module 6: Course assessment</div>
+      </div>
+
+      <!-- footer: verification link (placeholder) and Alison badge -->
+      <div class="verification-footer">
+        <div class="footer-seal">
+          <span>🔒  verified by Alison</span>
+          <!-- subtle icon placeholder (just a circle) -->
+          <span style="background:#deedf2; border-radius:20px; padding:0.3rem 1rem;">ID: 32a426b717</span>
+        </div>
+        <div class="footer-verify-link">
+          ⚡ alison.com/verify/32a426b777
+        </div>
+      </div>
+
+      <!-- tiny note: this is a reconstruction -->
+      <p style="text-align:center; margin-top: 2rem; color:#88a7b5; font-size:0.8rem; border-top:1px solid #cbdae2; padding-top:1rem;">
+        This is a public reconstruction based on valid Alison graduate data. The original verification exists at the link above.
+      </p>
+    </div>
+  </div>
+</body>
+</html>
